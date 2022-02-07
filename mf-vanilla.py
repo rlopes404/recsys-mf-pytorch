@@ -1,5 +1,5 @@
-import matplotlib.pyplot as plt
-import seaborn as sns
+#import matplotlib.pyplot as plt
+#import seaborn as sns
 
 import torch
 import torch.nn as nn
@@ -12,8 +12,11 @@ from torch.utils.data import DataLoader
 import pandas as pd
 import numpy as np
 import sys
+import json
 
-df = pd.read_csv('/home/ramon/Downloads/ml-1m/ratings.dat', header=None, names=['user', 'item', 'rating', 'timestamp'], sep='::')
+config = json.load(open('ml1m.json'))
+
+df = pd.read_csv(f"{config['data_file']}ratings.dat", header=None, names=['user', 'item', 'rating', 'timestamp'], sep='::')
 
 from datetime import datetime
 dates = df['timestamp'].apply(datetime.fromtimestamp)
