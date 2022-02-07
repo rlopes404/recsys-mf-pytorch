@@ -184,19 +184,19 @@ def train_epocs(model, interactions, epochs=10, lr=0.001, wd=0, weights=None):
     
     #test(model)
 
-def train_data_loader(model, train_loader, interactions, epochs=10, lr=0.001, wd=0, weights=None):
+def train_data_loader(model, train_loader, epochs=10, lr=0.001, wd=0, weights=None):
     
     optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=wd)
     #optimizer = torch.optim.SGD(model.parameters(), lr=lr, weight_decay=wd)
         
     model.train()
     
-    if weights == None:
-        weights = torch.ones(len(interactions))
-
+   
     for _ in range(epochs):
 
         for user_ids, item_ids, ratings, in train_loader:
+
+            weights = torch.ones(len(item_ids))
                         
             # clear the gradients
             optimizer.zero_grad()  
